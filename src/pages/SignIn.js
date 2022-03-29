@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 function Copyright(props) {
   return (
@@ -44,7 +45,12 @@ export default function SignIn() {
   };
 
   return (
+
     <ThemeProvider theme={theme}>
+      <TransformWrapper>
+{({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+<TransformComponent>
+
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -74,7 +80,11 @@ export default function SignIn() {
           >
               
         <img src={logo} className="App-logo" alt="logo" />
-       
+                   <div className="tools">
+              <button onClick={() => zoomIn()}>+</button>
+              <button onClick={() => zoomOut()}>-</button>
+              <button onClick={() => resetTransform()}>x</button>
+            </div>
               
             <Typography sx={{ mt: 2, textAlign: 'left' }} component="h1" variant="h5">
               LOGIN 
@@ -126,6 +136,14 @@ export default function SignIn() {
 
         </Grid>
       </Grid>
+</TransformComponent>
+)}
+</TransformWrapper>
     </ThemeProvider>
+
+
+
   );
+
+
 }
